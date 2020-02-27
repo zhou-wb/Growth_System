@@ -2,21 +2,21 @@
 
 
 
-DiscreteParaCurve::DiscreteParaCurve(glm::vec3 func(float), float coord_min, float coord_max, float delta)
+DiscreteParaCurve::DiscreteParaCurve(glm::dvec3 func(double), double coord_min, double coord_max, double delta)
 {
 	this->coord_min = coord_min;
 	this->coord_max = coord_max;
 	this->delta = delta;
 
 	//unsigned int num_of_points = (coord_max - coord_min) / delta;
-	for (float u = coord_min; u < coord_max; u += delta)
+	for (double u = coord_min; u < coord_max - delta * 0.1 ; u += delta)
 	{
 		coordinates.push_back(u);
 		points.push_back(func(u));
 	}
 }
 
-DiscreteParaCurve::DiscreteParaCurve(std::vector<float> coordinates, std::vector<glm::vec3> points):coordinates(coordinates), points(points)
+DiscreteParaCurve::DiscreteParaCurve(std::vector<double> coordinates, std::vector<glm::dvec3> points):coordinates(coordinates), points(points)
 {
 	delta = 0.1f;
 }
@@ -26,17 +26,17 @@ DiscreteParaCurve::~DiscreteParaCurve()
 {
 }
 
-float DiscreteParaCurve::getCoordinate(int index)
+double DiscreteParaCurve::getCoordinate(int index)
 {
 	return coordinates[index];
 }
 
-glm::vec3 DiscreteParaCurve::getPoint(int index)
+glm::dvec3 DiscreteParaCurve::getPoint(int index)
 {
 	return points[index];
 }
 
-std::vector<glm::vec3> DiscreteParaCurve::getPoints()
+std::vector<glm::dvec3> DiscreteParaCurve::getPoints()
 {
 	return points;
 }

@@ -6,12 +6,12 @@
 class ObjFile
 {
 public:
-	ObjFile(std::vector<std::vector<glm::vec3> > grid);
+	ObjFile(std::vector<std::vector<glm::dvec3> > grid);
 	~ObjFile();
 
 	void export_obj_file();
 
 private:
-	std::vector<std::vector<glm::vec3> > grid;
+	std::vector<std::vector<glm::dvec3> > grid;
 };
 

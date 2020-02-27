@@ -117,12 +117,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CoordinateSystem.cpp" />
     <ClCompile Include="DiscreteParaCurve.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjFile.cpp" />
     <ClCompile Include="SurfaceGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CoordinateSystem.h" />
     <ClInclude Include="DiscreteParaCurve.h" />
     <ClInclude Include="ObjFile.h" />
     <ClInclude Include="SurfaceGenerator.h" />

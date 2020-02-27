@@ -6,7 +6,7 @@
 
 
 
-ObjFile::ObjFile(std::vector<std::vector<glm::vec3> > grid) :grid(grid)
+ObjFile::ObjFile(std::vector<std::vector<glm::dvec3> > grid) :grid(grid)
 {
 }
 
@@ -30,22 +30,22 @@ void ObjFile::export_obj_file()
 
 		for (unsigned int j = 0; j < grid[i].size(); j++)
 		{
-			glm::vec3 p = grid[i][j];
+			glm::dvec3 p = grid[i][j];
 			outfile << "v " + std::to_string(p.x) + " " + std::to_string(p.y) + " " + std::to_string(p.z) << std::endl;
 			index[i].push_back(num);
 			num++;
 		}
 	}
 
-	std::vector<std::vector<glm::vec3> > vertex_normal;
+	std::vector<std::vector<glm::dvec3> > vertex_normal;
 	for (unsigned int i = 0; i < grid.size(); i++)
 	{
-		std::vector<glm::vec3> newline;
+		std::vector<glm::dvec3> newline;
 		vertex_normal.push_back(newline);
 
 		for (unsigned int j = 0; j < grid[i].size(); j++)
 		{
-			vertex_normal[i].push_back(glm::vec3(0.f, 0.f, 0.f));
+			vertex_normal[i].push_back(glm::dvec3(0.f, 0.f, 0.f));
 		}
 	}
 
@@ -53,10 +53,10 @@ void ObjFile::export_obj_file()
 	{
 		for (unsigned int j = 0; j < grid[i].size() - 1; j++)
 		{
-			glm::vec3 lowleft_p = grid[i][j];
-			glm::vec3 lowright_p = grid[i][j + 1];
-			glm::vec3 upleft_p = grid[i + 1][j];
-			glm::vec3 upright_p = grid[i + 1][j + 1];
+			glm::dvec3 lowleft_p = grid[i][j];
+			glm::dvec3 lowright_p = grid[i][j + 1];
+			glm::dvec3 upleft_p = grid[i + 1][j];
+			glm::dvec3 upright_p = grid[i + 1][j + 1];
 
 			int lowleft_i = index[i][j];
 			int lowright_i = index[i][j + 1];
@@ -66,7 +66,7 @@ void ObjFile::export_obj_file()
 			outfile << "f " + std::to_string(lowleft_i) + "//" + std::to_string(lowleft_i) + " " \
 				+ std::to_string(lowright_i) + "//" + std::to_string(lowright_i) + " " \
 				+ std::to_string(upleft_i) + "//" + std::to_string(upleft_i) << std::endl;
-			glm::vec3 fn = glm::cross(lowright_p - lowleft_p, upleft_p - lowleft_p);
+			glm::dvec3 fn = glm::cross(lowright_p - lowleft_p, upleft_p - lowleft_p);
 			vertex_normal[i][j] += fn;
 			vertex_normal[i][j + 1] += fn;
 			vertex_normal[i + 1][j] += fn;
@@ -85,7 +85,7 @@ void ObjFile::export_obj_file()
 	{
 		for (unsigned int j = 0; j < vertex_normal[i].size(); j++)
 		{
-			glm::vec3 vn = normalize(vertex_normal[i][j]);
+			glm::dvec3 vn = normalize(vertex_normal[i][j]);
 			outfile << "vn " + std::to_string(vn.x) + " " + std::to_string(vn.y) + " " + std::to_string(vn.z) << std::endl;
 		}
 	}
